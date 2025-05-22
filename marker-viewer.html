@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
+
+    <!--
+      Đặt định nghĩa component custom (nếu có) lên đây trước <a-scene>
+      Ví dụ component cursor-listener:
+    -->
+    <script>
+      AFRAME.registerComponent('cursor-listener', {
+        init: function () {
+          this.el.addEventListener('click', evt => {
+            console.log('Entity clicked!', evt.target);
+          });
+        }
+      });
+      
+    </script>
+
+    <style>
+      body, html { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+      a-scene { width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <a-scene embedded arjs>
+      <!-- Marker -->
+      <a-marker preset="hiro">
+        <a-gltf-model src="scene.glb"
+                      position="0 0 0"
+                      scale="100 100 100"
+                      rotation="-90 0 0"
+                      cursor-listener>
+        </a-gltf-model>
+      </a-marker>
+
+      <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
+      <a-entity camera></a-entity>
+    </a-scene>
+    
+  </a>
+  </body>
+</html>
